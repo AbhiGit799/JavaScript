@@ -1,0 +1,61 @@
+
+1) Array iteration
+
+for(let i=0; i<arr.length; i++) {
+    obj[arr[i]] = true;
+}
+
+The loop goes through each element of arr.
+arr[i] gives you the current element (like 1, 2, 3, etc.).
+
+2) Object property access with bracket notation
+
+In JavaScript, objects are collections of key–value pairs.
+
+obj[arr[i]] means:
+
+Take the value of arr[i] (say 2)
+
+Use it as a key in the object obj.
+
+3) Assignment
+
+= true assigns the boolean value true to that key.
+
+So after one iteration, if arr[i] = 2, the object becomes:
+
+{ 2: true }
+
+
+4) Effect of duplicates
+
+If the same number appears again in the array, it just overwrites the same key with true again.
+
+That’s why at the end, obj contains only unique keys from the array, each mapped to true.
+
+Output:
+=======
+{ 1: true, 2: true, 3: true, 4: true, 5: true }
+
+Why this is useful
+This is a common trick to remove duplicates from an array.
+
+
+How bracket notation works
+Ans => Objects in JavaScript are collections of key–value pairs.
+You can access properties in two ways:
+1) Dot notation: obj.key
+2) Bracket notation: obj["key"]
+
+
+Bracket notation is especially useful when:
+The property name is stored in a variable.
+The property name is not a valid identifier (e.g., contains spaces or starts with a number).
+
+
+
+
+
+
+
+

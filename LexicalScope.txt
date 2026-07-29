@@ -1,0 +1,105 @@
+Lexical scope in JavaScript means that variables are accessible based on where they are physically declared in the source code, 
+not where or how functions are called. In other words, inner functions can “see” variables from their outer functions, but not the other way around.
+
+🔑 Key Concepts of Lexical Scope
+Global Scope  
+Variables declared outside any function or block are accessible everywhere in the program.
+
+Local Scope  
+Variables declared inside a function are only accessible within that function.
+
+Nested Scope  
+Inner functions can access variables from their parent functions. This is the foundation of closures.
+
+Block Scope  
+Introduced with let and const in ES6. Variables declared inside {} (loops, conditionals) are only accessible within that block.
+
+
+📘 Example: Lexical Scope in Action
+
+function outer() {
+  let outerVar = "I am outer";
+
+  function inner() {
+    let innerVar = "I am inner";
+    console.log(outerVar); // ✅ Accessible
+    console.log(innerVar); // ✅ Accessible
+  }
+
+  inner();
+  console.log(innerVar); // ❌ ReferenceError
+}
+
+outer();
+
+
+inner() can access outerVar because of lexical scope.
+
+But outer() cannot access innerVar because it’s declared inside inner()
+
+⚙️ How It Works
+================
+JavaScript builds a scope chain at compile time.
+
+When a variable is referenced, JS looks from the innermost scope outward until it finds the variable.
+
+If not found, it throws a ReferenceError.
+
+This static nature is why lexical scope is also called static scoping.
+
+======================================================================================================================================================================
+
+How It Works: The Scope Chain
+==============================
+
+When the JavaScript engine executes your code and encounters a variable, it goes through a specific lookup process called the Scope Chain:
+
+It looks inside the current local scope (the immediate function or block).
+
+If it doesn't find the variable there, it steps outward to the parent scope.
+
+It repeats this process, moving one level out at a time, until it hits the global scope.
+
+If the variable isn't found in the global scope, it throws a ReferenceError.
+
+Because this chain is built lexically, it doesn't matter where a function is called; it only matters where it was declared.
+
+======================================================================================================================================================================
+
+Why Lexical Scope Matters: Closures
+Lexical scope is the structural foundation that makes closures possible in JavaScript. 
+A closure is created when an inner function remembers and accesses its lexical scope even when that inner function is executed outside its original scope.
+
+Here is a practical example of lexical scope generating a closure:
+
+function createCounter() {
+  let count = 0; // Lexical environment variable
+
+  return function increment() {
+    count++; // Accesses 'count' from its parent's lexical scope
+    console.log(count);
+  };
+}
+
+const counter = createCounter(); 
+// createCounter() has finished executing and its execution context is gone...
+
+counter(); // 1
+counter(); // 2
+
+Why this works: Even though createCounter() is done running, 
+the increment function still holds a reference to the environment where it was born. 
+Thanks to lexical scoping, that link to count remains intact.
+
+======================================================================================================================================================================
+
+
+
+
+
+
+
+
+
+
+

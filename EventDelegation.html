@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Delegation</title>
+</head>
+<body>
+    <div onclick="handleParent(event)" id="parent">
+        <button class="btn">Button-1</button>
+        <button class="btn">Button-2</button>
+        <button class="btn">Button-3</button>
+    </div>
+
+    <script>
+        function handleParent(event)
+        {
+            if(event.target.classList.contains("btn")){
+                 let btn = event.target.innerText;
+                 if(btn=="Button-1")
+                 {
+                    one()
+                 }else if(btn=="Button-2")
+                 {
+                    two()
+                 }
+                 else if(btn=="Button-3")
+                 {
+                    three()
+                 }
+            }
+            //console.log(event.target.innerText);
+            
+        }
+
+
+        function one(){
+            console.log("one");
+        }
+
+        function two()
+        {
+            console.log("two");
+            
+        }
+
+        function three()
+        {
+            console.log("three");
+            
+        }
+    </script>
+
+</body>
+</html>

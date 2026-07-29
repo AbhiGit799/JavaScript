@@ -1,0 +1,56 @@
+
+Why getCookie() is needed
+
+When you set a cookie in JavaScript using:
+document.cookie = "theme=dark";
+
+the browser stores it as part of a single string that may contain multiple cookies, like:
+
+"user=Abhishek; theme=dark; session=xyz"
+
+So document.cookie doesn’t give you a neat object — it’s just one long string.
+That means if you want the value of a specific cookie (like theme), you need to parse that string.
+
+What getCookie(name) does
+=> It takes the whole cookie string (document.cookie).
+=> Splits it into parts based on the cookie name you’re looking for.
+=> Extracts just the value of that cookie.
+
+For example:
+getCookie("theme"); // returns "dark"
+
+
+Without this helper, you’d have to manually search and slice the cookie string every time, which is messy and error-prone.
+
+Why not just use document.cookie.includes("theme=dark")?
+That works only for a quick check, but:
+=> It doesn’t give you the actual value (e.g., "dark" vs "light").
+=> It can fail if you have similar cookie names (like themeColor).
+=> It’s not reusable if you want to read multiple cookies.
+
+So getCookie() is a reliable, reusable utility to fetch cookie values by name.
+
+👉 Think of it like a dictionary lookup: cookies are stored as one big sentence, and getCookie() helps you pull out the exact word you need.
+
+===============================================================================================================================================================
+
+To make your cookie expire, you need to add an expiry date when setting it. By default, cookies created with 
+document.cookie are session cookies (they disappear when the browser is closed). If you want them to last longer 
+or expire at a specific time, you must include the expires or max-age attribute.
+
+
+🔑 Key points:
+=> expires must be in UTC string format (e.g., Thu, 30 Jul 2026 04:38:00 GMT).
+=> path=/ ensures the cookie is available across the whole site.
+=> You can change 1 * 24 * 60 * 60 * 1000 to any duration (e.g., 7 days).
+
+If you want a shorter expiry (say 1 minute), just change:
+date.setTime(date.getTime() + (1 * 60 * 1000)); // 1 minute
+
+
+
+
+
+
+
+

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Demo</title>
+</head>
+<body>
+    <h1>Document Object Model</h1>
+    <span>Span Tag</span>
+    <h1>Heading-1</h1>
+    <h1>Heading-2</h1>
+    <h1>Heading-3</h1>
+    <h2 class="h2cls">Heading-4</h2>
+    <h3 id="h3id">Heading-5</h3>
+
+    <script>
+        let heading = document.querySelector("h1").innerText;
+        console.log(heading);
+        let span = document.querySelector("span").innerText;
+        console.log(span);
+        let headings = document.querySelectorAll("h1")
+        console.log(headings);
+        let heading3 = document.querySelector('.h2cls').innerHTML
+        console.log(heading3);
+        let heading4 = document.querySelector('#h3id').innerHTML
+        console.log(heading4);
+        for(n of headings)
+        {
+           console.log(n.innerText);
+           
+        }
+        
+        
+    </script>
+</body>
+</html>

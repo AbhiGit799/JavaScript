@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Demo</title>
+</head>
+<body>
+
+    <h1>Cookie</h1>   
+    
+    <button onclick="setCookies('dark')">Set Dark Theme</button>
+    &nbsp;
+    <button onclick="setCookies('light')">Set Light Theme</button>
+    &nbsp;
+    <button onclick="displayCookies()">Display</button>
+    &nbsp;
+    <button onclick="CookiesExpire()">Set Expiry</button>
+    &nbsp;
+    <button onclick="clearCookies()">Clear Cookies</button>
+
+
+    <script>
+    // ✅ Set cookie
+    function setCookies(theme) {
+        document.cookie = "theme=" + theme + "; path=/";
+        handleTheme(); // apply immediately
+        console.log("Cookie set:", document.cookie);
+    }
+
+    // ✅ Get cookie by name
+    function getCookie(name) {
+        const value = "; " + document.cookie;
+        const parts = value.split("; " + name + "=");
+        if (parts.length === 2) {
+            return parts.pop().split(";").shift();
+        }
+    }
+
+    // ✅ Apply theme based on cookie
+    function handleTheme() {
+        const theme = getCookie("theme");
+        if (theme === "dark") {
+            document.body.style.backgroundColor = "black";
+            document.body.style.color = "white";
+        } else if (theme === "light") {
+            document.body.style.backgroundColor = "white";
+            document.body.style.color = "black";
+        }
+    }
+
+    // ✅ Display cookies in console
+    function displayCookies() {
+        console.log("All cookies:", document.cookie);
+        alert("Cookies: " + document.cookie);
+    }
+
+    // ✅ Set cookie with expiry (1 day)
+    function CookiesExpire() {
+        const date = new Date();
+        date.setTime(date.getTime() + (1 * 24 * 60 * 60 * 1000)); // 1 day
+        const expires = "expires=" + date.toUTCString();
+        document.cookie = "theme=dark; " + expires + "; path=/";
+        alert("Cookie set with 1-day expiry!");
+    }
+
+    // ✅ Clear all cookies
+    function clearCookies() {
+        const cookies = document.cookie.split(";");
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i];
+            const eqPos = cookie.indexOf("=");
+            const name = eqPos > -1 ? cookie.substr(0, eqPos).trim() : cookie.trim();
+            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+        }
+        alert("All cookies cleared!");
+    }
+
+    // Apply theme on page load
+    handleTheme();
+</script>
+
+</body>
+</html>
+
+
