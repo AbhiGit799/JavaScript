@@ -1,0 +1,26 @@
+To prevent the node_modules folder from being pushed to your GitHub repository, you need to use a .gitignore file. 
+This file tells Git which files or directories to ignore when committing. 
+
+1) Create a .gitignore file (Windows PowerShell)
+New-Item .gitignore -Type File
+
+2) Open .gitignore in VS Code
+code .gitignore
+
+3) Add node_modules to .gitignore
+Inside .gitignore, add:
+node_modules/
+
+4) Check if node_modules is already tracked
+Run:
+git rm -r --cached node_modules
+
+5) Commit the changes
+git add .gitignore
+git commit -m "Ignore node_modules folder"
+
+6) Push to GitHub
+git push origin main
+
+
+

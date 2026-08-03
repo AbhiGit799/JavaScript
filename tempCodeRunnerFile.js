@@ -1,2 +1,5 @@
-let obj3 = {...obj1,...obj2,address:{...obj1.address,...obj2.address}};
-// console.log(obj3);
+for(var i=1;i<=3;i++){
+//     setTimeout(()=>{
+//          console.log(i)
+//     },1000)
+// }
