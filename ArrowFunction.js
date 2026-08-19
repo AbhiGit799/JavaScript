@@ -18,4 +18,9 @@ function getAll()
 }
 getAll("green","apple","sunday")
 
+/* 
+In JavaScript, the arguments keyword refers to a special array‑like object available inside non‑arrow functions 
+that contains all the values passed to that function. It’s useful for handling variable numbers of parameters, 
+but in modern code, the rest parameter (...) is preferred.
 
+*/
