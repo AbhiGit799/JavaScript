@@ -1,0 +1,72 @@
+A Higher-Order Function (HOF) in JavaScript is simply a function that either takes another function as an argument or returns a function. 
+In React, HOFs are often used to reuse component logic — this is a great interview talking point 
+because it shows you understand both JavaScript fundamentals and React patterns.
+
+🔑 Real-Time React Example: Authentication Wrapper
+Imagine you’re building a React app where certain components should only be accessible if the user is logged in. 
+Instead of repeating the authentication check in every component, you can use a Higher-Order Component (HOC) — 
+which is just a higher-order function applied to React components.
+
+
+function withAuth(WrappedComponent)
+{
+    return function AuthWrapper(props)
+    {
+        const isLoggedIn = localStorage.getItem("token");
+
+        if(isLoggedIn)
+        {
+            return <div>Please log in to access this page.</div>
+        }
+
+        return <WrappedComponent {...props}/>;
+    }
+}
+
+function Dashboard()
+{
+    return <h2>Welcome to your dashboard </h2>;
+}
+
+const ProtectedDashboard = withAuth(Dashboard);
+
+🧩 How this works:
+withAuth is a higher-order function because it takes a component (WrappedComponent) as input and returns a new component.
+
+This lets you reuse authentication logic across multiple components without duplicating code.
+
+In an interview, you can explain that this pattern is similar to middleware in backend frameworks — it wraps functionality around existing logic.
+
+⚡ Another Real-Time Example: Logging Props
+==============================================
+
+function withLogger(WrappedComponent) {
+  return function LoggerWrapper(props) {
+    console.log("Props received:", props);
+    return <WrappedComponent {...props} />;
+  };
+}
+
+function Profile({ name }) {
+  return <h3>Hello, {name}</h3>;
+}
+
+const ProfileWithLogger = withLogger(Profile);
+
+Here, the HOF adds logging functionality to any component. This demonstrates cross-cutting concerns (like logging, analytics, or error handling) being handled elegantly.
+
+
+🎯 Interview Tip
+==================
+When asked about higher-order functions in React:
+Start with the definition (functions that take/return functions).
+Give a real-world example like authentication or logging.
+Emphasize code reusability and how HOFs reduce duplication.
+Mention that while HOCs were popular, React Hooks now often replace them — but HOCs are still relevant in legacy codebases.
+
+
+
+
+
+
+
