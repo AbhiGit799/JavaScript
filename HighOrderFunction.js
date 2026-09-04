@@ -24,9 +24,23 @@ console.log(f()); // Output: "Hello World"
 console.log(f(1, 2, 3)); // Output: "Hello World"
 console.log(f("test"));   // Output: "Hello World"
 
+console.log("\n");
 
+function withLogger(WrappedComponent) {
+  return function LoggerWrapper(props) {
+    console.log("Props received:", props);
+    return WrappedComponent(props)
+  };
+}
 
+function Profile(name) {
+  return console.log(`Profile component rendered with name: ${name}`);
+}
 
+const ProfileWithLogger = withLogger(Profile);
+
+ProfileWithLogger("Alice");
+ProfileWithLogger("Bob");
 
 
 

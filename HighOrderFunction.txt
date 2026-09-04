@@ -1,4 +1,5 @@
-A Higher-Order Function (HOF) in JavaScript is simply a function that either takes another function as an argument or returns a function. 
+A Higher-Order Function (HOF) in JavaScript is simply a function that either takes 
+another function as an argument or returns a function. 
 In React, HOFs are often used to reuse component logic — this is a great interview talking point 
 because it shows you understand both JavaScript fundamentals and React patterns.
 
@@ -35,7 +36,8 @@ withAuth is a higher-order function because it takes a component (WrappedCompone
 
 This lets you reuse authentication logic across multiple components without duplicating code.
 
-In an interview, you can explain that this pattern is similar to middleware in backend frameworks — it wraps functionality around existing logic.
+In an interview, you can explain that this pattern is similar to middleware in backend frameworks — 
+it wraps functionality around existing logic.
 
 ⚡ Another Real-Time Example: Logging Props
 ==============================================
@@ -53,7 +55,8 @@ function Profile({ name }) {
 
 const ProfileWithLogger = withLogger(Profile);
 
-Here, the HOF adds logging functionality to any component. This demonstrates cross-cutting concerns (like logging, analytics, or error handling) being handled elegantly.
+Here, the HOF adds logging functionality to any component. 
+This demonstrates cross-cutting concerns (like logging, analytics, or error handling) being handled elegantly.
 
 
 🎯 Interview Tip
