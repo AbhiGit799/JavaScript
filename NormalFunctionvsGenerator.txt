@@ -1,0 +1,61 @@
+🧩 Normal Function vs Generator
+In a normal function, you use return to send back a single value (or object/array). 
+Once return runs, the function ends.
+
+In a generator function (declared with function*), you use yield instead of return.
+Each yield produces a value for the caller.
+The function pauses at that point, saving its state.
+
+When you call .next(), execution resumes right after the last yield.
+
+⚡ Why No return Here?
+In your generator:
+function* inorderTraversal(arr) {
+    for (let el of arr) {
+        if (Array.isArray(el)) {
+            yield* inorderTraversal(el);
+        } else {
+            yield el;
+        }
+    }
+}
+
+The yield el is what “returns” values one by one.
+
+yield* inorderTraversal(el) delegates to another generator, streaming its values.
+
+You don’t need return because you’re not giving back a single final result — you’re producing a sequence of values.
+
+
+📘 Example Trace
+
+let arr = [1, [2, 3], 4];
+let gen = inorderTraversal(arr);
+
+console.log(gen.next()); // { value: 1, done: false }
+console.log(gen.next()); // { value: 2, done: false }
+console.log(gen.next()); // { value: 3, done: false }
+console.log(gen.next()); // { value: 4, done: false }
+console.log(gen.next()); // { value: undefined, done: true }
+
+
+Notice:
+
+Each yield gives a value.
+
+When all values are exhausted, the generator ends (done: true).
+
+If you had a return inside, it would only provide one final value and stop immediately — not what we want here.
+
+👉 So the short answer: Generators don’t need return to produce values. 
+They use yield to emit values step by step. return in a generator is only used to signal a 
+final value when the generator ends, but it’s optional and rarely needed in traversal problems.
+
+
+
+
+
+
+
+
+
