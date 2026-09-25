@@ -1,0 +1,278 @@
+
+What is Dynamic Programming?
+
+Dynamic Programming is a technique used when:
+
+A problem can be broken into smaller subproblems.
+The same subproblems are solved again and again.
+We store the result of a subproblem so we don't calculate it repeatedly.
+
+==================================================================================================================================
+
+Simple example: Fibonacci
+==========================
+Without DP:
+
+fib(5)
+├── fib(4)
+│   ├── fib(3)
+│   └── fib(2)
+└── fib(3)     ← calculated again
+    ├── fib(2)
+    └── fib(1)
+
+fib(3) and fib(2) are calculated multiple times.
+
+==================================================================================================================================
+
+How to recognize a DP problem
+
+Usually look for these clues:
+
+"Maximum" / "minimum"
+"Number of ways"
+"Can you reach..."
+"Longest..."
+"Best possible..."
+A problem where you make a choice at each step
+
+Common DP problems:
+====================
+Problem	                                                 Typical DP idea
+Fibonacci                              	                 Previous 2 states
+Climbing Stairs                              	         Number of ways
+House Robber                              	             Take or skip
+Coin Change                              	             Minimum coins
+0/1 Knapsack                              	             Take or don't take
+Longest Common Subsequence                               Compare two strings
+Longest Increasing Subsequence                           Previous smaller elements
+
+
+Two important DP approaches
+
+1. Memoization — Top Down
+
+Recursion + storing answers.
+
+2. Tabulation — Bottom Up
+
+Start from the smallest cases and build the answer.
+
+Easy way to remember
+DP = Break the problem into smaller problems + remember their answers.
+
+==================================================================================================================================
+
+A good way is to ask yourself a sequence of questions.
+
+1. First ask: "Is there a choice at each step?"
+2. Ask: "Are the same smaller problems repeated?"
+3. Ask: "Can I define a state?"
+
+==================================================================================================================================
+
+Instead learn to recognize this pattern:
+
+             Problem
+                ↓
+        Multiple choices
+                ↓
+       Smaller subproblems
+                ↓
+    Same subproblems repeated
+                ↓
+       Define a STATE
+                ↓
+      Define a TRANSITION
+                ↓
+             DP
+
+==================================================================================================================================
+
+DP using the 3 most important things: State → Transition → Base Case.
+
+
+1. Problem
+
+You have n stairs.
+
+You can climb either:
+
+1 stair at a time
+2 stairs at a time
+
+Question:
+
+How many different ways can you reach the top?
+
+For n = 3:
+
+1 + 1 + 1
+1 + 2
+2 + 1
+
+Answer = 3
+
+2. First think normally
+
+Suppose you're standing at stair 3.
+
+How could you have reached stair 3?
+
+You could have come from:
+
+stair 2 → stair 3    (+1)
+
+or
+
+stair 1 → stair 3    (+2)
+
+Therefore:
+
+ways(3) = ways(2) + ways(1)
+
+Similarly:
+
+ways(4) = ways(3) + ways(2)
+
+This gives us the DP pattern.
+
+
+3. What is the STATE?
+
+The state tells us:
+
+What does dp[i] represent?
+
+We define:
+
+dp[i] = number of ways to reach stair i
+
+That's our state.
+
+So:
+
+dp[1] = ways to reach stair 1
+dp[2] = ways to reach stair 2
+dp[3] = ways to reach stair 3
+...
+
+This is extremely important.
+
+Whenever you're solving a DP problem, first ask:
+
+What does my dp[i] represent?
+
+4. What is the TRANSITION?
+
+Transition means:
+
+How do I calculate the current state using previous states?
+
+For stair i, we can reach it from:
+
+i - 1
+
+or
+
+i - 2
+
+Therefore:
+
+dp[i] = dp[i - 1] + dp[i - 2]
+
+That's our transition.
+
+Think:
+
+             dp[i]
+            /     \
+       dp[i-1]   dp[i-2]
+          ↑          ↑
+         +1         +2
+5. What is the BASE CASE?
+
+The base case is where we already know the answer.
+
+For example:
+
+dp[1] = 1
+
+There is only one way to reach stair 1:
+
+1
+
+For stair 2:
+
+1 + 1
+2
+
+So:
+
+dp[2] = 2
+
+Therefore:
+
+dp[1] = 1
+dp[2] = 2
+
+These are our base cases.
+
+6. Now calculate
+
+For n = 5:
+
+dp[1] = 1
+dp[2] = 2
+
+dp[3] = dp[2] + dp[1]
+      = 2 + 1
+      = 3
+
+dp[4] = dp[3] + dp[2]
+      = 3 + 2
+      = 5
+
+dp[5] = dp[4] + dp[3]
+      = 5 + 3
+      = 8
+
+So answer:
+
+8
+
+==================================================================================================================================
+
+
+So remember these 3 questions
+
+Whenever you suspect a problem is DP, ask:
+
+① STATE
+********
+What does dp[i] mean?
+
+Example:
+
+dp[i] = number of ways to reach stair i
+
+② TRANSITION
+****************
+How can I calculate dp[i] from previous states?
+
+Example:
+
+dp[i] = dp[i-1] + dp[i-2]
+
+③ BASE CASE
+****************
+What are the smallest problems whose answers I already know?
+
+Example:
+
+dp[1] = 1
+dp[2] = 2
+
+==================================================================================================================================
+
+
