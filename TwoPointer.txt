@@ -1,0 +1,289 @@
+1. What is the Two-Pointer technique?
+
+The Two-Pointer technique means:
+
+We use two variables (pointers) to keep track of positions in an 
+array/string instead of using nested loops.
+
+Usually we have:
+
+let left = 0;
+let right = arr.length - 1;
+
+
+So one pointer starts from the left, and the other starts from the right.
+
+For example:
+
+Array:
+
+index:   0   1   2   3   4
+         ↓           ↓
+       left         right
+
+value:  [1,  2,  3,  4,  5]
+
+
+Then we move the pointers based on the problem.
+
+
+2. Why do we need Two Pointers?
+
+Consider this problem:
+
+Given a sorted array, find whether there are two numbers whose sum is 10.
+
+[1, 2, 3, 4, 6, 8, 9]
+
+A beginner might think:
+
+for (let i = 0; i < arr.length; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+        if (arr[i] + arr[j] === 10) {
+            return true;
+        }
+    }
+}
+
+This works, but we are checking many unnecessary combinations.
+
+That's where two pointers help.
+
+
+Note
+=====
+Because the array is sorted, we know:
+
+left side → smaller numbers
+right side → larger numbers
+
+
+5. The basic rule
+
+For a sorted array when looking for a target sum:
+
+if sum === target
+       ↓
+     found
+
+if sum < target
+       ↓
+   move left →
+
+if sum > target
+       ↓
+   move right ←
+
+That's the heart of the technique.
+
+
+6. Complete JavaScript example
+
+function twoSum(arr, target) {
+    let left = 0;
+    let right = arr.length - 1;
+
+    while (left < right) {
+        let sum = arr[left] + arr[right];
+
+        if (sum === target) {
+            return true;
+        }
+
+        if (sum < target) {
+            left++;
+        } else {
+            right--;
+        }
+    }
+
+    return false;
+}
+
+
+
+
+8. Why does this improve performance?
+
+Nested loops:
+
+for (...) {
+    for (...) {
+    }
+}
+
+usually give:
+
+O(n²)
+
+Two pointers:
+
+while (left < right) {
+    ...
+}
+
+usually give:
+
+O(n)
+
+Why?
+
+Because each pointer generally moves only forward/backward through the array.
+
+For example:
+
+left  → → → → 
+right ← ← ← ←
+
+They don't repeatedly scan the same elements.
+
+
+9. Important: Two Pointers doesn't always mean left + right
+
+There are several common patterns.
+
+Pattern 1 — Opposite ends
+left →        ← right
+
+[1, 2, 3, 4, 5]
+
+Used for things like:
+
+Two Sum in sorted array
+Palindrome
+Container With Most Water
+3Sum
+
+
+Pattern 2 — Same direction
+
+Both pointers move from left to right:
+
+slow →
+fast →→
+
+Example:
+
+[1, 1, 2, 2, 3]
+ ↑
+slow
+ ↑
+fast
+
+This is commonly used for:
+
+Remove duplicates
+Move zeroes
+Partitioning
+Fast/slow pointer problems
+
+========================================================================================
+
+
+10. Two Pointers vs Sliding Window
+
+Beginners often confuse these.
+
+They're related, but not exactly the same.
+
+Two pointers
+
+We have two positions:
+
+left          right
+ ↓              ↓
+[1, 2, 3, 4, 5, 6]
+
+We move them according to the problem.
+
+Sliding window
+
+We maintain a continuous range/window:
+
+left        right
+ ↓           ↓
+[1, 2, 3, 4, 5, 6]
+ └───────────┘
+    window
+
+For example:
+
+Find the longest subarray with sum ≤ target.
+
+Here, the window itself is important.
+
+
+========================================================================================
+
+
+11. How do I recognize a Two-Pointer problem?
+
+When you see a problem, look for clues such as:
+
+Clue 1: Sorted array
+*********************
+For example:
+
+Given a sorted array, find two numbers whose sum equals target.
+
+Very strong two-pointer signal.
+
+Clue 2: Pair of elements
+************************
+Find two numbers...
+
+Often consider two pointers.
+
+Clue 3: Compare from both ends
+*******************************
+Determine whether a string is a palindrome.
+
+
+Clue 4: Modify an array in-place
+*********************************
+For example:
+
+Move all zeroes to the end.
+
+A slow/fast pointer approach is often useful.
+
+
+The most important question is:
+
+"Based on the current result, which pointer can I safely move?"
+
+That's what makes Two Pointers powerful.
+
+
+A very simple template to remember
+
+For opposite-end problems:
+
+let left = 0;
+let right = arr.length - 1;
+
+while (left < right) {
+
+    // use arr[left] and arr[right]
+
+    if (condition) {
+        left++;
+    } else {
+        right--;
+    }
+}
+
+========================================================================================
+
+Two Sum → 
+Valid Palindrome → 
+Reverse String → 
+Move Zeroes → 
+Container With Most Water → 
+3Sum
+
+
+
+
+
+
